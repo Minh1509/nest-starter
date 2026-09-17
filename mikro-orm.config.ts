@@ -1,0 +1,22 @@
+import { Migrator } from '@mikro-orm/migrations';
+import { MikroOrmModuleOptions } from '@mikro-orm/nestjs';
+import path from 'path';
+import { databaseConfig } from 'src/config';
+
+const cliConfig = {
+  ...databaseConfig,
+  migrations: {
+    path: path.join(__dirname, "src/database/migrations"),
+  },
+  seeder: {
+    path: path.join(__dirname, 'src/database/seeders'),
+  },
+  extensions: [Migrator],
+};
+
+const ormConfig: MikroOrmModuleOptions = {
+  ...databaseConfig,
+  ...cliConfig,
+};
+
+export default ormConfig;
