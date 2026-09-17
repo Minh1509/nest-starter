@@ -1,11 +1,4 @@
-import {
-  Button,
-  Heading,
-  Hr,
-  Link,
-  Section,
-  Text,
-} from '@react-email/components';
+import { Button, Heading, Hr, Link, Section, Text } from '@react-email/components';
 import { BaseLayout } from '../_layouts/base';
 
 export interface ResetPasswordEmailProps {
@@ -26,8 +19,8 @@ export function ResetPasswordEmail({
         Hello <strong>{fullName || ''}</strong>,
       </Text>
       <Text>
-        We received a request to reset the password for your account. Please
-        click the button below to proceed:
+        We received a request to reset the password for your account. Please click the
+        button below to proceed:
       </Text>
       <Section style={styles.buttonSection}>
         <Button href={resetPasswordUrl} style={styles.button}>
@@ -35,16 +28,15 @@ export function ResetPasswordEmail({
         </Button>
       </Section>
       <Text>
-        If the button above does not work, copy and paste this link into your
-        browser:
+        If the button above does not work, copy and paste this link into your browser:
       </Text>
       <Link href={resetPasswordUrl} style={styles.link}>
         {resetPasswordUrl}
       </Link>
       <Hr style={styles.hr} />
       <Text style={styles.note}>
-        If you did not request a password reset, please ignore this email. Your
-        account remains safe.
+        If you did not request a password reset, please ignore this email. Your account
+        remains safe.
       </Text>
     </BaseLayout>
   );

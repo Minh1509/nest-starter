@@ -1,3 +1,7 @@
+import { EntityManager, wrap } from '@mikro-orm/core';
+import { Inject, Injectable } from '@nestjs/common';
+import { ConfigType } from '@nestjs/config';
+import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 import {
   AccountAction,
   APP_DEFAULTS,
@@ -6,32 +10,29 @@ import {
   hashData,
   JwtTokenType,
   Role,
-  ServerException, SuccessResponseDto,
+  ServerException,
+  SuccessResponseDto,
   TokenPayload,
   UserRequestPayload,
   verifyHashed,
 } from 'src/common';
-import { GoogleAuthService, RedisService } from 'src/integrations';
-import { Inject, Injectable } from '@nestjs/common';
-import { ConfigType } from '@nestjs/config';
-import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 import { appConfiguration, codeExpiresConfiguration, jwtConfiguration } from 'src/config';
+import { UserRepository } from 'src/data-access/user';
+import { GoogleAuthService, RedisService } from 'src/integrations';
+import { BaseService } from 'src/modules/base.service';
+import { EmailService } from 'src/modules/email';
 import { v4 as uuidv4 } from 'uuid';
 import {
   ChangePasswordDto,
+  ForgotPasswordDto,
   LoginDto,
   LoginResponseDto,
   ResetPasswordDto,
-  ForgotPasswordDto,
   SignUpDto,
   SignUpResponseDto,
   VerifyResetPasswordDto,
   VerifyResetPasswordResponseDto,
 } from './dto';
-import { UserRepository } from 'src/data-access/user';
-import { EntityManager, wrap } from '@mikro-orm/core';
-import { BaseService } from 'src/modules/base.service';
-import { EmailService } from 'src/modules/email';
 
 @Injectable()
 export class AuthService extends BaseService {
@@ -80,7 +81,7 @@ export class AuthService extends BaseService {
       isActive: true,
       emailVerified: false,
       password: hashedPassword,
-      role: Role.User
+      role: Role.User,
     });
 
     await this.em.persistAndFlush(user);
@@ -107,9 +108,7 @@ export class AuthService extends BaseService {
     return { accessToken };
   }
 
-  async sendResetPasswordLink(
-    body: ForgotPasswordDto,
-  ): Promise<SuccessResponseDto> {
+  async sendResetPasswordLink(body: ForgotPasswordDto): Promise<SuccessResponseDto> {
     const { email } = body;
     const user = await this.userRepo.findOne({ email });
     if (!user) throw new ServerException(ERROR_RESPONSE.USER_NOT_FOUND);
@@ -141,7 +140,7 @@ export class AuthService extends BaseService {
       title: 'Reset password',
       fullName: user.fullName,
       resetPasswordUrl: resetPasswordUrl,
-    })
+    });
 
     // Save token to redis
     await this.redisService.setValue<string>(

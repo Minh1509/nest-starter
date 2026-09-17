@@ -1,6 +1,6 @@
-import { Gender, Role } from 'src/common';
 import { Entity, EntityRepositoryType, Filter, Property } from '@mikro-orm/core';
 import { Exclude } from 'class-transformer';
+import { Gender, Role } from 'src/common';
 import { BaseEntity } from 'src/data-access/base.entity';
 import { UserRepository } from 'src/data-access/user/user.repository';
 

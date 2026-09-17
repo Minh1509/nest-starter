@@ -1,9 +1,9 @@
-import { s3Configuration } from 'src/config';
 import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { s3Configuration } from 'src/config';
 import { Logger } from 'winston';
 
 @Injectable()

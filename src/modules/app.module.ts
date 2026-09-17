@@ -1,29 +1,25 @@
-import {
-  AllExceptionFilter,
-  getWinstonConfig,
-  HttpLoggerMiddleware,
-} from "src/common";
-import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
-import { ConfigModule, ConfigType } from "@nestjs/config";
-import { APP_FILTER, APP_GUARD } from "@nestjs/core";
-import { ServeStaticModule } from "@nestjs/serve-static";
-import { join } from "path";
-import { WinstonModule } from "nest-winston";
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ConfigModule, ConfigType } from '@nestjs/config';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { WinstonModule } from 'nest-winston';
+import { join } from 'path';
+import { AllExceptionFilter, getWinstonConfig, HttpLoggerMiddleware } from 'src/common';
 import {
   appConfiguration,
+  dbConfiguration,
   kafkaConfiguration,
   rabbitmqConfiguration,
-  dbConfiguration,
-} from "src/config";
-import { AppAuthGuard, RoleBasedAccessControlGuard } from "src/guards";
-import { UploadModule } from "src/modules/upload";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { AuthModule } from "./auth";
-import { AwsS3Module, RedisModule } from "src/integrations";
-import { BaseRepository } from "src/data-access/base.repository";
-import { MikroOrmModule } from "@mikro-orm/nestjs";
-import { EmailModule } from "src/modules/email";
+} from 'src/config';
+import { BaseRepository } from 'src/data-access/base.repository';
+import { AppAuthGuard, RoleBasedAccessControlGuard } from 'src/guards';
+import { AwsS3Module, RedisModule } from 'src/integrations';
+import { EmailModule } from 'src/modules/email';
+import { UploadModule } from 'src/modules/upload';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { AuthModule } from './auth';
 
 @Module({
   imports: [
@@ -57,8 +53,8 @@ import { EmailModule } from "src/modules/email";
       inject: [appConfiguration.KEY],
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, "../../public"),
-      serveRoot: "/static",
+      rootPath: join(__dirname, '../../public'),
+      serveRoot: '/static',
     }),
     UploadModule,
     // Business Logic Modules
@@ -86,6 +82,6 @@ import { EmailModule } from "src/modules/email";
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(HttpLoggerMiddleware).forRoutes("*");
+    consumer.apply(HttpLoggerMiddleware).forRoutes('*');
   }
 }

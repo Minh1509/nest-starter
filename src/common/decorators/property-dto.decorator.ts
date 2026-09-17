@@ -21,9 +21,9 @@ import {
   ValidateNested,
 } from 'class-validator';
 import _ from 'lodash';
+import { ServerException } from '../../exceptions';
 import { ERROR_RESPONSE } from '../constants';
 import { ValidationError } from '../errors';
-import { ServerException } from '../../exceptions';
 
 type PropertyType = Type<unknown> | Function | Record<string, any> | 'file';
 

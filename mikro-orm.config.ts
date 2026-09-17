@@ -6,7 +6,7 @@ import { databaseConfig } from 'src/config';
 const cliConfig = {
   ...databaseConfig,
   migrations: {
-    path: path.join(__dirname, "src/database/migrations"),
+    path: path.join(__dirname, 'src/database/migrations'),
   },
   seeder: {
     path: path.join(__dirname, 'src/database/seeders'),

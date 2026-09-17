@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { renderEmail, ResetPasswordEmail } from "@repo/email-templates";
-import { AbstractEmailService } from "./abstract-email.service";
-import { ResetPasswordMailPayload } from "./email.interface";
-import { EMAIL_SUBJECT } from "./email.constant";
+import { Injectable } from '@nestjs/common';
+import { renderEmail, ResetPasswordEmail } from '@repo/email-templates';
+import { AbstractEmailService } from './abstract-email.service';
+import { EMAIL_SUBJECT } from './email.constant';
+import { ResetPasswordMailPayload } from './email.interface';
 
 @Injectable()
 export class EmailService {

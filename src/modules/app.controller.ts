@@ -1,5 +1,5 @@
-import { Public, SwaggerApiDocument } from 'src/common';
 import { Controller, Get } from '@nestjs/common';
+import { Public, SwaggerApiDocument } from 'src/common';
 import { AppService } from './app.service';
 
 @Controller()

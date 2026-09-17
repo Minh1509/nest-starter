@@ -1,6 +1,6 @@
-import { AccessControl, SwaggerApiDocument } from 'src/common';
 import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AccessControl, SwaggerApiDocument } from 'src/common';
 import { UploadPresignBodyDto, UploadPresignResponseDto } from 'src/modules/upload/dto';
 import { UploadService } from './upload.service';
 

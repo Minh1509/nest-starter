@@ -1,5 +1,5 @@
-import { PropertyDto } from 'src/common';
 import { IsStrongPassword, Matches, MaxLength } from 'class-validator';
+import { PropertyDto } from 'src/common';
 
 export class ChangePasswordDto {
   @PropertyDto({

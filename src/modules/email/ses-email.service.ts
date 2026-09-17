@@ -1,10 +1,10 @@
 import { SendEmailCommand, SESClient } from '@aws-sdk/client-ses';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
-import { awsSesConfiguration } from 'src/config';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
-import { AbstractEmailService } from './abstract-email.service';
+import { awsSesConfiguration } from 'src/config';
 import { Logger } from 'winston';
+import { AbstractEmailService } from './abstract-email.service';
 import { EmailOptions } from './email.interface';
 
 @Injectable()

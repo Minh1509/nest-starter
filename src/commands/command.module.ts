@@ -14,9 +14,7 @@ import { CreateAdminQuestions } from './questions/create-admin.questions';
       validationOptions: {
         abortEarly: false,
       },
-      load: [
-        dbConfiguration
-      ],
+      load: [dbConfiguration],
     }),
     MikroOrmModule.forRootAsync({
       useFactory: (dbConfig: ConfigType<typeof dbConfiguration>) => {

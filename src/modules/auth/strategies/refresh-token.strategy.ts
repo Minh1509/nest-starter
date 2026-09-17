@@ -1,15 +1,15 @@
+import { Inject, Injectable } from '@nestjs/common';
+import { ConfigType } from '@nestjs/config';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 import {
   ERROR_RESPONSE,
   JwtTokenType,
   ServerException,
   UserRequestPayload,
 } from 'src/common';
-import { RedisService } from 'src/integrations';
-import { Inject, Injectable } from '@nestjs/common';
-import { ConfigType } from '@nestjs/config';
-import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
 import { jwtConfiguration } from 'src/config';
+import { RedisService } from 'src/integrations';
 
 @Injectable()
 export class RefreshTokenStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {

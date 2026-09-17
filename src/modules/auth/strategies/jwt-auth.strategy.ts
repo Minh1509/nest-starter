@@ -1,10 +1,10 @@
-import { jwtConfiguration } from 'src/config';
-import { UserRequestPayload } from 'src/common';
-import { RedisService } from 'src/integrations';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { UserRequestPayload } from 'src/common';
+import { jwtConfiguration } from 'src/config';
+import { RedisService } from 'src/integrations';
 
 @Injectable()
 export class JwtAuthStrategy extends PassportStrategy(Strategy, 'jwt-auth') {

@@ -1,14 +1,21 @@
-import { Public, SuccessResponseDto, SwaggerApiDocument, User, UserRequestPayload, RefreshToken } from 'src/common';
 import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+  Public,
+  RefreshToken,
+  SuccessResponseDto,
+  SwaggerApiDocument,
+  User,
+  UserRequestPayload,
+} from 'src/common';
 import { AuthService } from './auth.service';
 import {
   ChangePasswordDto,
+  ForgotPasswordDto,
   LoginDto,
   LoginResponseDto,
   RefreshTokenResponseDto,
   ResetPasswordDto,
-  ForgotPasswordDto,
   SignUpDto,
   SignUpResponseDto,
   VerifyResetPasswordDto,
@@ -134,9 +141,7 @@ export class AuthController {
       description: `Reset user password`,
     },
   })
-  async resetPassword(
-    @Body() body: ResetPasswordDto,
-  ): Promise<SuccessResponseDto> {
+  async resetPassword(@Body() body: ResetPasswordDto): Promise<SuccessResponseDto> {
     return this.authService.resetPassword(body);
   }
 

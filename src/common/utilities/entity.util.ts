@@ -1,5 +1,5 @@
-import { ApiAction, HandleEntityMutationOptions } from 'src/common';
 import _ from 'lodash';
+import { ApiAction, HandleEntityMutationOptions } from 'src/common';
 import { HandleEntityMutationArgs } from '../interfaces/entity.interface';
 
 export function handleEntityMutation<Entity extends object>(

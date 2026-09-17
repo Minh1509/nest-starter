@@ -56,7 +56,7 @@ export function getWinstonConfig(
       }),
     ],
   };
-};
+}
 
 interface LogBootstrapOptions {
   nodeEnv: NodeEnv;
@@ -99,4 +99,4 @@ export function logBootstrapInfo(
     message: `Application is ready. View Swagger at http://${host}:${appPort}/swagger`,
     context: 'Application',
   });
-};
+}

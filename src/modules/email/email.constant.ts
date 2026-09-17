@@ -1,3 +1,3 @@
 export const EMAIL_SUBJECT = {
-  RESET_PASSWORD: 'Password Reset.'
-}
+  RESET_PASSWORD: 'Password Reset.',
+};

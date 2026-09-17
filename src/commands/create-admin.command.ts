@@ -1,7 +1,7 @@
-import { hashData, Role } from 'src/common';
 import { EntityManager } from '@mikro-orm/core';
 import chalk from 'chalk';
 import { Command, CommandRunner, InquirerService, Option } from 'nest-commander';
+import { hashData, Role } from 'src/common';
 import { User, UserRepository } from 'src/data-access/user';
 import { commandConstants, questionConstants } from './command.constant';
 

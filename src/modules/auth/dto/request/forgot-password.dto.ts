@@ -1,5 +1,5 @@
-import { PropertyDto } from 'src/common';
 import { IsEmail, MaxLength } from 'class-validator';
+import { PropertyDto } from 'src/common';
 
 export class ForgotPasswordDto {
   @PropertyDto({

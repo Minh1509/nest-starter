@@ -1,9 +1,9 @@
-import { ERROR_RESPONSE, ServerException } from 'src/common';
-import { TokenPayload } from 'src/common';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Strategy } from 'passport-custom';
+import { ERROR_RESPONSE, ServerException } from 'src/common';
+import { TokenPayload } from 'src/common';
 
 @Injectable()
 export class GatewayAuthStrategy extends PassportStrategy(Strategy, 'gateway-auth') {

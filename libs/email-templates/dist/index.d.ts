@@ -10,4 +10,4 @@ declare function ResetPasswordEmail({ title, fullName, resetPasswordUrl, }: Rese
 
 declare function renderEmail<T extends object>(Component: ComponentType<T>, props: T): Promise<string>;
 
-export { ResetPasswordEmail, type ResetPasswordEmailProps, renderEmail };
+export { ResetPasswordEmail, renderEmail };

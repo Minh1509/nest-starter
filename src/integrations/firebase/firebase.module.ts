@@ -1,8 +1,8 @@
 import * as admin from 'firebase-admin';
-import { firebaseConfiguration } from 'src/config';
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { app as Firebase } from 'firebase-admin';
+import { firebaseConfiguration } from 'src/config';
 import { FIREBASE_APP } from './firebase.const';
 import { FirebaseService } from './firebase.service';
 

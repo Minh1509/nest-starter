@@ -1,0 +1,6 @@
+node_modules
+dist
+coverage
+.git
+libs/*/dist
+libs/*/node_modules

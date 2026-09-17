@@ -66,7 +66,8 @@ export class AllExceptionFilter implements ExceptionFilter {
 
       const rpcError = exception as any;
       _.assign(errorData, {
-        statusCode: rpcError?.statusCode || ERROR_RESPONSE.INTERNAL_SERVER_ERROR.statusCode,
+        statusCode:
+          rpcError?.statusCode || ERROR_RESPONSE.INTERNAL_SERVER_ERROR.statusCode,
         message: rpcError?.message || ERROR_RESPONSE.INTERNAL_SERVER_ERROR.message,
         errorCode: rpcError.errorCode || ERROR_RESPONSE.INTERNAL_SERVER_ERROR.errorCode,
         errorService: microserviceName,

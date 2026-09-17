@@ -1,6 +1,6 @@
 import { ValidationError } from 'class-validator';
-import { ERROR_RESPONSE } from '../constants';
 import { ServerException } from '../../exceptions';
+import { ERROR_RESPONSE } from '../constants';
 
 /**
  * Recursively formats an array of raw class-validator ValidationErrors into a
@@ -14,16 +14,16 @@ import { ServerException } from '../../exceptions';
 export function formatValidationErrors(errors: ValidationError[]): Record<string, any> {
   const formattedErrors: Record<string, any> = {};
 
-for (const error of errors) {
-  const { property, constraints, children } = error;
+  for (const error of errors) {
+    const { property, constraints, children } = error;
 
-  if (constraints) {
-    formattedErrors[property] = Object.values(constraints).join(', ');
-  } else if (children && children.length > 0) {
-    formattedErrors[property] = formatValidationErrors(children);
+    if (constraints) {
+      formattedErrors[property] = Object.values(constraints).join(', ');
+    } else if (children && children.length > 0) {
+      formattedErrors[property] = formatValidationErrors(children);
+    }
   }
-}
-return formattedErrors;
+  return formattedErrors;
 }
 
 /**

@@ -1,9 +1,9 @@
-import { ERROR_RESPONSE } from 'src/common';
-import { ServerException } from 'src/common';
-import { AwsS3Service } from 'src/integrations';
 import { Inject, Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { ERROR_RESPONSE } from 'src/common';
+import { ServerException } from 'src/common';
+import { AwsS3Service } from 'src/integrations';
 import { Logger } from 'winston';
 import { UploadPresignBodyDto, UploadPresignResponseDto } from './dto';
 

@@ -1,6 +1,6 @@
-import { googleConfiguration } from 'src/config';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { googleConfiguration } from 'src/config';
 import { GoogleAuthService } from './google-auth.service';
 
 @Module({

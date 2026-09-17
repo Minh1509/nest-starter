@@ -34,10 +34,10 @@
 ```bash
   # Generate a migration script based on entities (recommended)
   pnpm migration:create --name migration_name
-  
+
   # Create blank file
-  pnpm migration:createBlank --name migration_name 
-  
+  pnpm migration:createBlank --name migration_name
+
 ```
 
 ### 3.2. Migrate

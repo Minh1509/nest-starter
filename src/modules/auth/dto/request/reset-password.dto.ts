@@ -1,6 +1,6 @@
-import { VerifyResetPasswordDto } from './verify-reset-password.dto';
-import { PropertyDto } from 'src/common';
 import { IsStrongPassword, Matches, MaxLength } from 'class-validator';
+import { PropertyDto } from 'src/common';
+import { VerifyResetPasswordDto } from './verify-reset-password.dto';
 
 export class ResetPasswordDto extends VerifyResetPasswordDto {
   @PropertyDto({
