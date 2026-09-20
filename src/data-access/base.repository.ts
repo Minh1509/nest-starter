@@ -44,4 +44,34 @@ export abstract class BaseRepository<T extends BaseEntity> extends EntityReposit
       },
     };
   }
+
+  async paginateGetRawMany(
+    queryBuilder: SelectQueryBuilder<T>,
+    page: number = APP_DEFAULTS.PAGINATION.PAGE_DEFAULT,
+    pageSize: number = APP_DEFAULTS.PAGINATION.LIMIT_DEFAULT,
+  ): Promise<PaginationResult<T>> {
+    page = +page;
+    pageSize = +pageSize;
+    const offset = (page - 1) * pageSize;
+
+    const subQuery = queryBuilder.clone().getKnexQuery();
+    const [{ count }] = await subQuery.client
+      .queryBuilder()
+      .count({ count: '*' })
+      .from(subQuery.as('sub'));
+    const total = Number(count) || 0;
+
+    const items = await queryBuilder.clone().limit(+pageSize).offset(offset).execute();
+    const totalPages = +pageSize > 0 ? Math.ceil(total / +pageSize) : 1;
+
+    return {
+      data: items,
+      pagination: {
+        page: +page,
+        pageSize: +pageSize,
+        total,
+        totalPages,
+      },
+    };
+  }
 }
