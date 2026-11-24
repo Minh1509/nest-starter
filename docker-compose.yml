@@ -2,7 +2,7 @@ services:
   node:
     build:
       context: .
-      dockerfile: .docker/compose/nodejs/Dockerfile.local
+      dockerfile: .docker/compose/nodejs/Dockerfile
     container_name: nest_starter_node
     extends:
       file: .docker/compose/nodejs/node.yml
