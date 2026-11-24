@@ -29,4 +29,4 @@ COPY --from=build /app/libs/email-templates/dist ./libs/email-templates/dist
 
 USER node
 EXPOSE 3600
-CMD ["node", "dist/main.js"]
+CMD ["node", "/app/dist/main.js"]
