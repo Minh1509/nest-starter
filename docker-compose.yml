@@ -1,5 +1,6 @@
 services:
   node:
+    image: minh1509/nest_starter_node:latest
     build:
       context: .
       dockerfile: .docker/compose/nodejs/Dockerfile
