@@ -13,6 +13,7 @@ export const validationSchema = Joi.object({
   DB_DATABASE: Joi.string().required(),
   DB_CONNECTION: Joi.string().required(),
   DB_SCHEMA: Joi.string().required(),
+  DB_SSL: Joi.boolean().default(false),
 
   //Google config validation
   GOOGLE_CLIENT_ID: Joi.string().required(),
