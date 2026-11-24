@@ -85,6 +85,9 @@ importers:
       decimal.js:
         specifier: 10.6.0
         version: 10.6.0
+      dotenv:
+        specifier: 17.2.3
+        version: 17.2.3
       express-basic-auth:
         specifier: 1.2.1
         version: 1.2.1
@@ -218,9 +221,6 @@ importers:
       '@types/supertest':
         specifier: 6.0.2
         version: 6.0.2
-      dotenv:
-        specifier: 17.2.3
-        version: 17.2.3
       eslint:
         specifier: 9.18.0
         version: 9.18.0
