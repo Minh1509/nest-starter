@@ -21,7 +21,7 @@ RUN corepack enable
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY libs/email-templates/package.json ./libs/email-templates/package.json
-RUN pnpm install --prod --frozen-lockfile
+RUN pnpm install --prod --frozen-lockfile --ignore-scripts
 
 COPY --from=build /work/dist ./dist
 COPY --from=build /work/libs/email-templates/dist ./libs/email-templates/dist
