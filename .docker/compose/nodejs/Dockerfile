@@ -1,6 +1,6 @@
 FROM node:22-alpine AS build
 
-WORKDIR /app
+WORKDIR /work
 RUN corepack enable
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
@@ -15,7 +15,7 @@ RUN pnpm --filter @repo/email-templates build && pnpm build
 
 FROM node:22-alpine AS production
 
-WORKDIR /app
+WORKDIR /work
 ENV NODE_ENV=production
 RUN corepack enable
 
@@ -29,4 +29,4 @@ COPY --from=build /app/libs/email-templates/dist ./libs/email-templates/dist
 
 USER node
 EXPOSE 3600
-CMD ["node", "/app/dist/main.js"]
+CMD ["node", "/dist/main.js"]

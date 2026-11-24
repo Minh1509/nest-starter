@@ -4,5 +4,5 @@ services:
     tty: true
     environment:
       - HOST=0.0.0.0
-    working_dir: /app
+    working_dir: /work
     restart: unless-stopped
