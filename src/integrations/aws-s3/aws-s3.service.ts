@@ -12,6 +12,7 @@ export class AwsS3Service {
   private readonly bucket: string;
   private readonly region: string;
   private readonly s3Url: string;
+  private readonly cloudfrontUrl: string;
 
   constructor(
     @Inject(s3Configuration.KEY)
@@ -21,6 +22,7 @@ export class AwsS3Service {
     this.bucket = this.s3Config.awsS3BucketName;
     this.region = this.s3Config.awsS3Region;
     this.s3Url = this.s3Config.awsS3Url;
+    this.cloudfrontUrl = this.s3Config.awsCloudfrontUrl;
 
     this.s3Client = new S3Client({
       region: this.region,
@@ -52,8 +54,10 @@ export class AwsS3Service {
       expiresIn: 900, // 15 minutes
     });
 
-    const baseUrl = this.s3Url.replace(/\/+$/, '');
-    const fileUrl = `${baseUrl}/${this.bucket}/${encodeURI(fileKey)}`;
+    const baseUrl = this.cloudfrontUrl
+      ? this.cloudfrontUrl.replace(/\/+$/, '')
+      : `${this.s3Url.replace(/\/+$/, '')}/${this.bucket}`;
+    const fileUrl = `${baseUrl}/${encodeURI(fileKey)}`;
 
     return { uploadUrl, fileUrl };
   }

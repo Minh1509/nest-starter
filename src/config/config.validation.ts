@@ -51,6 +51,7 @@ export const validationSchema = Joi.object({
   AWS_S3_SECRET_ACCESS_KEY: Joi.string().required(),
   AWS_S3_BUCKET_NAME: Joi.string().required(),
   AWS_S3_URL: Joi.string().uri().required(),
+  AWS_CLOUDFRONT_URL: Joi.string().uri().allow('').optional(),
 
   // Microsoft Outlook OAuth
   MICROSOFT_CLIENT_ID: Joi.string().required(),
