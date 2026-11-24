@@ -24,9 +24,9 @@ COPY libs/email-templates/package.json ./libs/email-templates/package.json
 RUN node -e "const fs = require('node:fs'); const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8')); delete pkg.scripts.prepare; fs.writeFileSync('package.json', JSON.stringify(pkg));" \
     && pnpm install --prod --frozen-lockfile
 
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/libs/email-templates/dist ./libs/email-templates/dist
+COPY --from=build /work/dist ./dist
+COPY --from=build /work/libs/email-templates/dist ./libs/email-templates/dist
 
 USER node
 EXPOSE 3600
-CMD ["node", "/dist/main.js"]
+CMD ["node", "/work/dist/main.js"]
