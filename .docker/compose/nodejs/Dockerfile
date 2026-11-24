@@ -21,8 +21,7 @@ RUN corepack enable
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY libs/email-templates/package.json ./libs/email-templates/package.json
-RUN node -e "const fs = require('node:fs'); const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8')); delete pkg.scripts.prepare; fs.writeFileSync('package.json', JSON.stringify(pkg));" \
-    && pnpm install --prod --frozen-lockfile
+RUN pnpm install --prod --frozen-lockfile
 
 COPY --from=build /work/dist ./dist
 COPY --from=build /work/libs/email-templates/dist ./libs/email-templates/dist
