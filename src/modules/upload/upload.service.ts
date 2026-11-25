@@ -5,7 +5,11 @@ import { ERROR_RESPONSE } from 'src/common';
 import { ServerException } from 'src/common';
 import { AwsS3Service } from 'src/integrations';
 import { Logger } from 'winston';
-import { UploadPresignBodyDto, UploadPresignResponseDto } from './dto';
+import {
+  UploadFileResponseDto,
+  UploadPresignBodyDto,
+  UploadPresignResponseDto,
+} from './dto';
 
 @Injectable()
 export class UploadService {
@@ -37,6 +41,44 @@ export class UploadService {
       throw new ServerException({
         ...ERROR_RESPONSE.BAD_REQUEST,
         message: 'Failed to generate upload URL',
+      });
+    }
+  }
+
+  async uploadFile(
+    file: Express.Multer.File,
+    uploadPath?: string,
+  ): Promise<UploadFileResponseDto> {
+    const fileName = file.originalname.replace(/\\/g, '/').split('/').pop();
+
+    if (!fileName || fileName === '.' || fileName === '..') {
+      throw new ServerException({
+        ...ERROR_RESPONSE.INVALID_FILES,
+        message: 'Invalid file name',
+      });
+    }
+
+    try {
+      const result = await this.awsS3Service.uploadFile(
+        fileName,
+        file.mimetype,
+        file.buffer,
+        uploadPath,
+      );
+
+      return plainToInstance(UploadFileResponseDto, result, {
+        excludeExtraneousValues: true,
+      });
+    } catch (error) {
+      this.logger.error({
+        message: 'UploadService.uploadFile: Failed to upload file to S3',
+        context: 'UploadService.uploadFile',
+        error,
+      });
+
+      throw new ServerException({
+        ...ERROR_RESPONSE.INTERNAL_SERVER_ERROR,
+        message: 'Failed to upload file to S3',
       });
     }
   }

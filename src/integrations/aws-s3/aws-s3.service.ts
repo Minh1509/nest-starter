@@ -40,9 +40,7 @@ export class AwsS3Service {
     contentType: string,
     bucketFolder?: string,
   ): Promise<{ uploadUrl: string; fileUrl: string }> {
-    const fileKey = bucketFolder
-      ? `${bucketFolder.replace(/^\/|\/$/g, '')}/${fileName}`
-      : fileName;
+    const fileKey = this.getFileKey(fileName, bucketFolder);
 
     const command = new PutObjectCommand({
       Bucket: this.bucket,
@@ -54,12 +52,7 @@ export class AwsS3Service {
       expiresIn: 900, // 15 minutes
     });
 
-    const baseUrl = this.cloudfrontUrl
-      ? this.cloudfrontUrl.replace(/\/+$/, '')
-      : `${this.s3Url.replace(/\/+$/, '')}/${this.bucket}`;
-    const fileUrl = `${baseUrl}/${encodeURI(fileKey)}`;
-
-    return { uploadUrl, fileUrl };
+    return { uploadUrl, fileUrl: this.getFileUrl(fileKey) };
   }
 
   async getPresignedDownloadUrl(
@@ -93,8 +86,8 @@ export class AwsS3Service {
     contentType: string,
     body: Buffer,
     bucketFolder?: string,
-  ): Promise<{ fileKey: string }> {
-    const fileKey = bucketFolder ? `${bucketFolder}/${fileName}` : `${fileName}`;
+  ): Promise<{ fileKey: string; fileUrl: string }> {
+    const fileKey = this.getFileKey(fileName, bucketFolder);
 
     const command = new PutObjectCommand({
       Bucket: this.bucket,
@@ -104,6 +97,18 @@ export class AwsS3Service {
     });
     await this.s3Client.send(command);
 
-    return { fileKey };
+    return { fileKey, fileUrl: this.getFileUrl(fileKey) };
+  }
+
+  private getFileKey(fileName: string, bucketFolder?: string): string {
+    const folder = bucketFolder?.replace(/^\/|\/$/g, '');
+    return folder ? `${folder}/${fileName}` : fileName;
+  }
+
+  private getFileUrl(fileKey: string): string {
+    const baseUrl = this.cloudfrontUrl
+      ? this.cloudfrontUrl.replace(/\/+$/, '')
+      : `${this.s3Url.replace(/\/+$/, '')}/${this.bucket}`;
+    return `${baseUrl}/${encodeURI(fileKey)}`;
   }
 }
