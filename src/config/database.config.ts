@@ -17,10 +17,13 @@ export const databaseConfig = {
   baseDir: __dirname,
   debug: process.env.NODE_ENV === NodeEnv.Production,
   entities: Object.values(entities),
-  driverOptions:
-    process.env.DB_SSL === 'true'
-      ? { connection: { ssl: { rejectUnauthorized: true } } }
-      : {},
+  driverOptions: {
+    connection: {
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    },
+  },
   cache: {
     enabled: false,
   },
