@@ -18,11 +18,8 @@ export const databaseConfig = {
   debug: process.env.NODE_ENV === NodeEnv.Production,
   entities: Object.values(entities),
   driverOptions: {
-    connection: {
-      ssl: {
-        rejectUnauthorized: false,
-      },
-    },
+    connection:
+      process.env.DB_SSL === 'true' ? { ssl: { rejectUnauthorized: false } } : {},
   },
   cache: {
     enabled: false,
